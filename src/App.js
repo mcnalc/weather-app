@@ -24,7 +24,12 @@ class App extends Component {
       const response = await apiCall.json();
 
       console.log(response);
-      if (response && response.main && response.sys && Array.isArray(response.weather)) {
+      if (
+        response &&
+        response.main &&
+        response.sys &&
+        Array.isArray(response.weather)
+      ) {
         this.setState({
           temperature: response.main.temp,
           city: response.name,
@@ -35,13 +40,15 @@ class App extends Component {
         });
       } else {
         this.setState({
-          error: `Oh no error from the API: ${response.message}`
+          error: `Error: ${
+            response.message
+          }. Please enter a valid city and country`
         });
       }
     } else {
-       this.setState({
-          error: "Please enter a valid city and country"
-        });
+      this.setState({
+        error: "Please enter a valid city and country"
+      });
     }
   };
 
